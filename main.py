@@ -69,10 +69,20 @@ def info():
 
 
 def shutdown():
-    os.system("shutdown -h now")
+    if platform.system() == "Windows":
+        os.system('shutdown -s')
+    elif platform.system() == "Linux" or platform.system() == "Darwin":
+        os.system("shutdown -h now")
+    else:
+        print("Os not supported!")
 
 def restart():
-    os.system('reboot now')
+    if platform.system() == "Windows":
+        os.system("shutdown -t 0 -r -f")
+    elif platform.system() == "Linux" or platform.system() == "Darwin":
+        os.system('reboot now')
+    else:
+        print("Os not supported!")
 
 # Create a grid layout with 4 apps per row and 4 rows (to accommodate 13 buttons)
 # Row and column positions for buttons
