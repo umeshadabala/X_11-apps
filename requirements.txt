@@ -1,0 +1,6 @@
+pyqt5
+pillow
+lib-platform
+psutil
+GPUtil
+PyQtWebEngine
