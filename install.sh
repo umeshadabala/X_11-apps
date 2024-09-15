@@ -45,7 +45,7 @@ export DISPLAY=:0
 
 # Run the Python GUI application
 echo "Running your Python GUI app..."
-python3 /path/to/your_app.py
+python3 main.py
 
 # Optionally, stop the X server when the app closes
 echo "Stopping X server..."
