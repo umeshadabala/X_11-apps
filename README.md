@@ -30,18 +30,15 @@
 - **Image-Based Buttons** for easy navigation.
 - **Background Image** for enhanced aesthetics.
 
-## Setup and Installation
 
-### Prerequisites
-1. **Python 3.x** is required to run the application. If you don't have Python installed, download it from [here](https://www.python.org/downloads/).
+
+## Installation
+1. **Python 3.10 or higher** is required to run the application. If you don't have Python installed, download it from [here](https://www.python.org/downloads/).
 2. Ensure you have all packages installed. It's typically included with Python, but if it's missing, you can install it using:
    
    ```bash
    pip install -r requirements.txt
-   
-
-   ### Installation
-
+     
 ### Clone the repository:
 ```bash
 git clone https://github.com/umeshadabala/X_11-apps.git
@@ -75,8 +72,8 @@ Info: Display information about the app.
 ### System Requirements
 OS: Windows, Linux
 Python Version: 3.8 or higher
-Contributing
+### Contributing
 If you'd like to contribute to this project, please fork the repository and submit a pull request. You can also open issues for bug reports or feature requests.
 
-License
+### License
 This project is licensed under the MIT License.
