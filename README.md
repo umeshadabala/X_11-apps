@@ -70,8 +70,10 @@ Sheets: Simple spreadsheet functionality.
 Sudoku: Play the classic Sudoku puzzle game.
 Info: Display information about the app.
 ### System Requirements
-OS: Windows, Linux
-Python Version: 3.8 or higher
+ OS: Windows, Linux
+ <br>
+ Python Version: 3.8 or higher
+
 ### Contributing
 If you'd like to contribute to this project, please fork the repository and submit a pull request. You can also open issues for bug reports or feature requests.
 
