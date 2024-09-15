@@ -1,6 +1,9 @@
 # X_11 GUI
 
-**X_11 GUI** is a Python-based desktop application built using Tkinter, designed to integrate multiple utility applications in one graphical interface. The project includes features like a calculator, paint app, browser, notepad, to-do list, and games like Snake and Tic-Tac-Toe, as well as system controls like shutdown and restart.
+**X_11 GUI** is a versatile Python-based desktop application built using Tkinter. It serves as an all-in-one utility tool, featuring a range of sub-applications such as a calculator, paint app, browser, notepad, to-do list, and games like Snake and Tic-Tac-Toe. Additionally, it provides system controls like shutdown and restart.
+
+### Use Case for CLI-Based OS
+This application is particularly useful for **CLI-based operating systems** (e.g., minimal Linux distributions) where users may need access to essential tools without the overhead of a full desktop environment. X_11 GUI enables users to launch utilities through a graphical interface, making it a powerful addition for systems typically operated via the command line.
 
 ## Table of Contents
 - [Features](#features)
@@ -72,6 +75,10 @@ Info: Display information about the app.
  OS: Windows, Linux
  <br>
  Python Version: 3.8 or higher
+ 
+### Optimized for CLI-Based OS:
+X_11 GUI can be run in CLI-based operating systems that may lack a full-fledged desktop environment, providing users access to essential tools through an intuitive GUI.
+
 
 ### Contributing
 If you'd like to contribute to this project, please fork the repository and submit a pull request. You can also open issues for bug reports or feature requests.
