@@ -47,7 +47,7 @@ git clone https://github.com/umeshadabala/X_11-apps.git
 
 cd X_11-apps
 
-python3 main.py
+python main.py
 ```
 ### Running the Application
 Once the application is running, you'll see a window with a grid of image-based buttons. Each button launches a corresponding sub-application or performs a system operation.
