@@ -38,7 +38,6 @@
    
    ```bash
    pip install -r requirements.txt
-     
 ### Clone the repository:
 ```bash
 git clone https://github.com/umeshadabala/X_11-apps.git
