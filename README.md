@@ -79,6 +79,11 @@ Info: Display information about the app.
 ### Optimized for CLI-Based OS:
 X_11 GUI can be run in CLI-based operating systems that may lack a full-fledged desktop environment, providing users access to essential tools through an intuitive GUI.
 
+```
+chmod +x install.sh
+./install.sh
+```
+
 
 ### Contributing
 If you'd like to contribute to this project, please fork the repository and submit a pull request. You can also open issues for bug reports or feature requests.
