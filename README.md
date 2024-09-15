@@ -36,7 +36,7 @@ This application is particularly useful for **CLI-based operating systems** (e.g
 
 
 ## Installation
-1. **Python 3.10 or higher** is required to run the application. If you don't have Python installed, download it from [here](https://www.python.org/downloads/).
+1. **Python 3.9 or higher** is required to run the application. If you don't have Python installed, download it from [here](https://www.python.org/downloads/).
 2. Ensure you have all packages installed. It's typically included with Python, but if it's missing, you can install it using:
    
    ```bash
@@ -74,7 +74,7 @@ Info: Display information about the app.
 ### System Requirements
  OS: Windows, Linux
  <br>
- Python Version: 3.8 or higher
+ Python Version: 3.9 or higher
  
 ### Optimized for CLI-Based OS:
 X_11 GUI can be run in CLI-based operating systems that may lack a full-fledged desktop environment, providing users access to essential tools through an intuitive GUI.
