@@ -84,7 +84,8 @@ chmod +x install.sh
 ./install.sh
 ```
 
-
+### Credits
+Special thanks to Flaticon[https://www.flaticon.com/] for the images
 ### Contributing
 If you'd like to contribute to this project, please fork the repository and submit a pull request. You can also open issues for bug reports or feature requests.
 
