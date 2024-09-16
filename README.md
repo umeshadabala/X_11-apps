@@ -115,6 +115,7 @@ X11Forwarding yes #you need to edit it in two places in the script
 X11DisplayOffset 0
 X11UseLocalhost yes
 sudo system restart ssh
+startx
 ssh -X username@local_host
 python3 main.py
 ```
