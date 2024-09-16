@@ -27,5 +27,5 @@ sleep 5
 
 # SSH to localhost with X11 forwarding and run the Python GUI app
 echo "Running Python GUI application with X11 forwarding..."
-ssh -X $USER@localhost "python3 /path/to/main.py"
+ssh -X $USER@localhost "python3 main.py"
 
