@@ -7,222 +7,148 @@ from PyQt5.QtPrintSupport import *
 import os
 import sys
 
-# main window
+# creating main window class
 class MainWindow(QMainWindow):
 
 	# constructor
 	def __init__(self, *args, **kwargs):
 		super(MainWindow, self).__init__(*args, **kwargs)
 
-		# creating a tab widget
-		self.tabs = QTabWidget()
 
-		# making document mode true
-		self.tabs.setDocumentMode(True)
+		# creating a QWebEngineView
+		self.browser = QWebEngineView()
 
-		# adding action when double clicked
-		self.tabs.tabBarDoubleClicked.connect(self.tab_open_doubleclick)
+		# setting default browser url as google
+		self.browser.setUrl(QUrl("http://google.com"))
 
-		# adding action when tab is changed
-		self.tabs.currentChanged.connect(self.current_tab_changed)
+		# adding action when url get changed
+		self.browser.urlChanged.connect(self.update_urlbar)
 
-		# making tabs closeable
-		self.tabs.setTabsClosable(True)
+		# adding action when loading is finished
+		self.browser.loadFinished.connect(self.update_title)
 
-		# adding action when tab close is requested
-		self.tabs.tabCloseRequested.connect(self.close_current_tab)
+		# set this browser as central widget or main window
+		self.setCentralWidget(self.browser)
 
-		# making tabs as central widget
-		self.setCentralWidget(self.tabs)
-
-		# creating a status bar
+		# creating a status bar object
 		self.status = QStatusBar()
 
-		# setting status bar to the main window
+		# adding status bar to the main window
 		self.setStatusBar(self.status)
 
-		# creating a tool bar for navigation
+		# creating QToolBar for navigation
 		navtb = QToolBar("Navigation")
 
-		# adding tool bar tot he main window
+		# adding this tool bar tot he main window
 		self.addToolBar(navtb)
 
-		# creating back action
+		# adding actions to the tool bar
+		# creating a action for back
 		back_btn = QAction("Back", self)
 
 		# setting status tip
 		back_btn.setStatusTip("Back to previous page")
 
-		# adding action to back button
-		# making current tab to go back
-		back_btn.triggered.connect(lambda: self.tabs.currentWidget().back())
+		# adding action to the back button
+		# making browser go back
+		back_btn.triggered.connect(self.browser.back)
 
-		# adding this to the navigation tool bar
+		# adding this action to tool bar
 		navtb.addAction(back_btn)
 
-		# similarly adding next button
+		# similarly for forward action
 		next_btn = QAction("Forward", self)
 		next_btn.setStatusTip("Forward to next page")
-		next_btn.triggered.connect(lambda: self.tabs.currentWidget().forward())
+
+		# adding action to the next button
+		# making browser go forward
+		next_btn.triggered.connect(self.browser.forward)
 		navtb.addAction(next_btn)
 
-		# similarly adding reload button
+		# similarly for reload action
 		reload_btn = QAction("Reload", self)
 		reload_btn.setStatusTip("Reload page")
-		reload_btn.triggered.connect(lambda: self.tabs.currentWidget().reload())
+
+		# adding action to the reload button
+		# making browser to reload
+		reload_btn.triggered.connect(self.browser.reload)
 		navtb.addAction(reload_btn)
 
-		# creating home action
+		# similarly for home action
 		home_btn = QAction("Home", self)
 		home_btn.setStatusTip("Go home")
-
-		# adding action to home button
 		home_btn.triggered.connect(self.navigate_home)
 		navtb.addAction(home_btn)
 
-		# adding a separator
+		# adding a separator in the tool bar
 		navtb.addSeparator()
 
-		# creating a line edit widget for URL
+		# creating a line edit for the url
 		self.urlbar = QLineEdit()
 
-		# adding action to line edit when return key is pressed
+		# adding action when return key is pressed
 		self.urlbar.returnPressed.connect(self.navigate_to_url)
 
-		# adding line edit to tool bar
+		# adding this to the tool bar
 		navtb.addWidget(self.urlbar)
 
-		# similarly adding stop action
+		# adding stop action to the tool bar
 		stop_btn = QAction("Stop", self)
 		stop_btn.setStatusTip("Stop loading current page")
-		stop_btn.triggered.connect(lambda: self.tabs.currentWidget().stop())
-		navtb.addAction(stop_btn)
 
-		# creating first tab
-		self.add_new_tab(QUrl('http://www.google.com'), 'Homepage')
+		# adding action to the stop button
+		# making browser to stop
+		stop_btn.triggered.connect(self.browser.stop)
+		navtb.addAction(stop_btn)
 
 		# showing all the components
 		self.show()
 
-		# setting window title
-		self.setWindowTitle("Browser")
 
-	# method for adding new tab
-	def add_new_tab(self, qurl = None, label ="Blank"):
+	# method for updating the title of the window
+	def update_title(self):
+		title = self.browser.page().title()
+		self.setWindowTitle("% s -  Browser" % title)
 
-		# if url is blank
-		if qurl is None:
-			# creating a google url
-			qurl = QUrl('http://www.google.com')
 
-		# creating a QWebEngineView object
-		browser = QWebEngineView()
-
-		# setting url to browser
-		browser.setUrl(qurl)
-
-		# setting tab index
-		i = self.tabs.addTab(browser, label)
-		self.tabs.setCurrentIndex(i)
-
-		# adding action to the browser when url is changed
-		# update the url
-		browser.urlChanged.connect(lambda qurl, browser = browser:
-								self.update_urlbar(qurl, browser))
-
-		# adding action to the browser when loading is finished
-		# set the tab title
-		browser.loadFinished.connect(lambda _, i = i, browser = browser:
-									self.tabs.setTabText(i, browser.page().title()))
-
-	# when double clicked is pressed on tabs
-	def tab_open_doubleclick(self, i):
-
-		# checking index i.e
-		# No tab under the click
-		if i == -1:
-			# creating a new tab
-			self.add_new_tab()
-
-	# when tab is changed
-	def current_tab_changed(self, i):
-
-		# get the curl
-		qurl = self.tabs.currentWidget().url()
-
-		# update the url
-		self.update_urlbar(qurl, self.tabs.currentWidget())
-
-		# update the title
-		self.update_title(self.tabs.currentWidget())
-
-	# when tab is closed
-	def close_current_tab(self, i):
-
-		# if there is only one tab
-		if self.tabs.count() < 2:
-			# do nothing
-			return
-
-		# else remove the tab
-		self.tabs.removeTab(i)
-
-	# method for updating the title
-	def update_title(self, browser):
-
-		# if signal is not from the current tab
-		if browser != self.tabs.currentWidget():
-			# do nothing
-			return
-
-		# get the page title
-		title = self.tabs.currentWidget().page().title()
-
-		# set the window title
-		self.setWindowTitle("% s - Browser" % title)
-
-	# action to go to home
+	# method called by the home action
 	def navigate_home(self):
 
-		# go to google
-		self.tabs.currentWidget().setUrl(QUrl("http://www.google.com"))
+		# open the google
+		self.browser.setUrl(QUrl("http://www.google.com"))
 
-	# method for navigate to url
+	# method called by the line edit when return key is pressed
 	def navigate_to_url(self):
 
-		# get the line edit text
-		# convert it to QUrl object
+		# getting url and converting it to QUrl object
 		q = QUrl(self.urlbar.text())
 
-		# if scheme is blank
+		# if url is scheme is blank
 		if q.scheme() == "":
-			# set scheme
+			# set url scheme to html
 			q.setScheme("http")
 
-		# set the url
-		self.tabs.currentWidget().setUrl(q)
+		# set the url to the browser
+		self.browser.setUrl(q)
 
-	# method to update the url
-	def update_urlbar(self, q, browser = None):
+	# method for updating url
+	# this method is called by the QWebEngineView object
+	def update_urlbar(self, q):
 
-		# If this signal is not from the current tab, ignore
-		if browser != self.tabs.currentWidget():
-
-			return
-
-		# set text to the url bar
+		# setting text to the url bar
 		self.urlbar.setText(q.toString())
 
-		# set cursor position
+		# setting cursor position of the url bar
 		self.urlbar.setCursorPosition(0)
 
-# creating a PyQt5 application
+
+# creating a pyQt5 application
 app = QApplication(sys.argv)
 
 # setting name to the application
-app.setApplicationName("Browser")
+app.setApplicationName(" Browser")
 
-# creating MainWindow object
+# creating a main window object
 window = MainWindow()
 
 # loop
