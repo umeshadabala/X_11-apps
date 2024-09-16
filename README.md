@@ -89,7 +89,7 @@ chmod +x install.sh
 We are sorry for the inconvenience cause by the drawbacks we'll get a solution for these bugs in the next version as soon as possible.
 
 ### Common errors:
-1.If the browser doesnt work then try these these command:-
+1.If the browser doesnt work then try these command:-
 ```bash
 sudo apt-get install libqt5webengine5 libqt5quick5
 ```
