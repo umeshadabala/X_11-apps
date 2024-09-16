@@ -4,3 +4,5 @@ lib-platform
 psutil
 GPUtil
 PyQtWebEngine
+python-vlc
+opencv-python
