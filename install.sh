@@ -16,7 +16,7 @@ sudo sed -i 's/#X11UseLocalhost yes/X11UseLocalhost yes/g' /etc/ssh/sshd_config
 
 # Restart SSH service to apply changes
 echo "Restarting SSH service..."
-sudo systemctl restart ssh
+sudo system restart ssh
 
 # Start the X server (startx) and run the Python GUI app
 echo "Starting the X server..."
