@@ -1,52 +1,31 @@
 #!/bin/bash
 
-# Function to check if a package is installed
-check_package() {
-    dpkg -l | grep -q "$1"
-}
+# Update package lists
+echo "Updating package lists..."
+sudo apt-get update
 
-# Install Xorg (X11 server) if not installed
-if ! check_package "xorg"; then
-    echo "Installing Xorg (X11 server)..."
-    sudo apt-get update
-    sudo apt-get install -y xorg
-fi
+# Install Xorg, Openbox (minimal window manager), xterm, xauth, and openssh-server
+echo "Installing Xorg, Openbox, Xterm, Xauth, and OpenSSH Server..."
+sudo apt-get install -y xorg openbox xterm xauth openssh-server
 
-# Install a minimal window manager (openbox) if not installed
-if ! check_package "openbox"; then
-    echo "Installing Openbox (window manager)..."
-    sudo apt-get install -y openbox
-fi
+# Edit the sshd_config file to enable X11 forwarding
+echo "Configuring SSH for X11 forwarding..."
+sudo sed -i 's/#X11Forwarding no/X11Forwarding yes/g' /etc/ssh/sshd_config
+sudo sed -i 's/#X11DisplayOffset 10/X11DisplayOffset 0/g' /etc/ssh/sshd_config
+sudo sed -i 's/#X11UseLocalhost yes/X11UseLocalhost yes/g' /etc/ssh/sshd_config
 
-# Install Python if not installed
-if ! check_package "python3"; then
-    echo "Installing Python3..."
-    sudo apt-get install -y python3
-fi
+# Restart SSH service to apply changes
+echo "Restarting SSH service..."
+sudo systemctl restart ssh
 
-# Install Tkinter if not installed (for Python3)
-if ! python3 -c "import tkinter" 2>/dev/null; then
-    echo "Installing Tkinter for Python3..."
-    sudo apt-get install -y python3-tk
-fi
-
-# Start the X server
-echo "Starting X server..."
+# Start the X server (startx) and run the Python GUI app
+echo "Starting the X server..."
 startx &
 
-# Wait for the X server to start
-while ! xdpyinfo >/dev/null 2>&1; do
-    echo "Waiting for X server to start..."
-    sleep 1
-done
+# Give some time for the X server to start
+sleep 5
 
-# Set the DISPLAY variable
-export DISPLAY=:0
+# SSH to localhost with X11 forwarding and run the Python GUI app
+echo "Running Python GUI application with X11 forwarding..."
+ssh -X $USER@localhost "python3 /path/to/main.py"
 
-# Run the Python GUI application
-echo "Running your Python GUI app..."
-python3 main.py
-
-# Optionally, stop the X server when the app closes
-echo "Stopping X server..."
-killall Xorg
