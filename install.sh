@@ -11,7 +11,7 @@ sudo apt-get install -y xorg openbox xterm xauth openssh-server
 # Edit the sshd_config file to enable X11 forwarding
 echo "Configuring SSH for X11 forwarding..."
 sudo sed -i 's/#X11Forwarding no/X11Forwarding yes/g' /etc/ssh/sshd_config
-sudo sed -i 's/#X11DisplayOffset 10/X11DisplayOffset 0/g' /etc/ssh/sshd_config
+sudo sed -i 's/#X11DisplayOffset 0/X11DisplayOffset 0/g' /etc/ssh/sshd_config
 sudo sed -i 's/#X11UseLocalhost yes/X11UseLocalhost yes/g' /etc/ssh/sshd_config
 
 # Restart SSH service to apply changes
