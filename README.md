@@ -82,7 +82,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### Drwabacks:-
+### Drawbacks:-
 1.Can't run multiple applications at one time.
 2.To run a second application the first application should be closed.
 3.When a application is open the main applications gets stuck.
