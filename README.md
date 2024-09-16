@@ -81,12 +81,43 @@ X_11 GUI can be run in CLI-based operating systems that may lack a full-fledged 
 chmod +x install.sh
 ./install.sh
 ```
+
+### Drwabacks:-
+1.Can't run multiple applications at one time.
+2.To run a second application the first application should be closed.
+3.When a application is open the main applications gets stuck.
+We are sorry for the inconvenience cause by the drawbacks we'll get a solution for these bugs in the next version as soon as possible.
+
 ### Common errors:
 1.If the browser doesnt work then try these these command:-
 ```bash
 sudo apt-get install libqt5webengine5 libqt5quick5
 ```
-
+2.Starting an X server :-
+2.1(FOR A VM):-
+```bash
+sudo apt install xauth
+sudo nano /etc/ssh/sshd_config
+X11Forwarding yes #you need to edit it in two places in the script
+X11DisplayOffset 0
+X11UseLocalhost yes
+sudo system restart ssh
+ssh -X username@remote_host
+python3 main.py
+```
+2.2(FOR LOCAL SYSTEM):-
+```bash
+sudo apt-get update
+sudo apt-get install xorg openbox
+sudo apt-get install xterm xauth openssh-server 
+sudo nano /etc/ssh/sshd_config
+X11Forwarding yes #you need to edit it in two places in the script
+X11DisplayOffset 0
+X11UseLocalhost yes
+sudo system restart ssh
+ssh -X username@local_host
+python3 main.py
+```
 ### Credits
 Special thanks to Flaticon[https://www.flaticon.com/] for the images.
 ### Contributing
