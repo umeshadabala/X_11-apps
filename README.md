@@ -94,6 +94,7 @@ We are sorry for the inconvenience cause by the drawbacks we'll get a solution f
 sudo apt-get install libqt5webengine5 libqt5quick5
 ```
 2.Starting an X server :-
+<br>
 2.1(FOR A VM):-
 ```bash
 sudo apt install xauth
